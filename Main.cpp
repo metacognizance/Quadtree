@@ -66,11 +66,17 @@ void Main::handleEvents()
 
 void Main::update(const sf::Time & p_deltaTime){
 	m_delay -= p_deltaTime.asSeconds();
+	
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && m_delay <= 0.f)
 	{
 		Object object = Object(sf::Rect<float>(sf::Mouse::getPosition(m_window).x, sf::Mouse::getPosition(m_window).y, 2, 2));
 		m_quadtree.m_root.insert(object);
-		m_delay = 0.1f;
+		m_delay = 0.05f;
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
+		m_quadtree.m_root.clean();
 	}
 }
 
